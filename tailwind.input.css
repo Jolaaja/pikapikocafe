@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@source "./index.html";
+@source "./menu.html";
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid #b2784f;
+    outline-offset: 4px;
+  }
+}

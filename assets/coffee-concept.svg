@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="table" x1="30" y1="20" x2="1090" y2="780" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6B4933"/>
+      <stop offset=".48" stop-color="#3D2B23"/>
+      <stop offset="1" stop-color="#211916"/>
+    </linearGradient>
+    <radialGradient id="light" cx="0" cy="0" r="1" gradientTransform="matrix(645 402 -493 791 423 193)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C99D70" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#C99D70" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="coffee" cx="0" cy="0" r="1" gradientTransform="matrix(191 205 -199 185 502 291)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A46A40"/>
+      <stop offset=".66" stop-color="#633B27"/>
+      <stop offset="1" stop-color="#38241C"/>
+    </radialGradient>
+    <linearGradient id="ceramic" x1="337" y1="218" x2="782" y2="648" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8E9"/>
+      <stop offset=".53" stop-color="#E9D8C1"/>
+      <stop offset="1" stop-color="#B99877"/>
+    </linearGradient>
+    <linearGradient id="saucer" x1="311" y1="214" x2="812" y2="680" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7EAD7"/>
+      <stop offset=".57" stop-color="#CFB79B"/>
+      <stop offset="1" stop-color="#9E8066"/>
+    </linearGradient>
+    <filter id="shadow" x="236" y="152" width="651" height="624" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset dy="28"/>
+      <feGaussianBlur stdDeviation="30"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix values="0 0 0 0 0.08 0 0 0 0 0.04 0 0 0 0 0.02 0 0 0 0.45 0"/>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <filter id="grain">
+      <feTurbulence baseFrequency=".7" numOctaves="2" seed="12" type="fractalNoise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA slope=".12" type="linear"/></feComponentTransfer>
+    </filter>
+  </defs>
+  <path fill="url(#table)" d="M0 0h1200v800H0z"/>
+  <path fill="url(#light)" d="M0 0h1200v800H0z"/>
+  <g opacity=".18" stroke="#E3BF91" stroke-width="2">
+    <path d="M0 131c228 31 416-33 623-4 197 27 372 42 577 4"/>
+    <path d="M0 174c211 22 447-23 629 10 238 44 380 36 571 7"/>
+    <path d="M0 653c227-29 407 27 631-3 226-30 356-38 569-4"/>
+    <path d="M0 698c212-20 439 25 646-9 212-34 346-30 554-5"/>
+  </g>
+  <g filter="url(#shadow)">
+    <circle cx="581" cy="417" r="254" fill="url(#saucer)"/>
+    <circle cx="581" cy="417" r="229" stroke="#FFF8EA" stroke-opacity=".62" stroke-width="3"/>
+    <circle cx="581" cy="417" r="192" fill="url(#ceramic)"/>
+    <circle cx="581" cy="417" r="163" fill="#40281D"/>
+    <circle cx="581" cy="417" r="151" fill="url(#coffee)"/>
+    <path d="M730 400c87-31 125 15 122 74-3 58-62 90-121 62" stroke="#D3B99A" stroke-width="36"/>
+    <path d="M730 400c66-23 96 10 94 52-2 42-45 65-91 45" stroke="#F0DFC7" stroke-width="10"/>
+    <path d="M579 510c-73-39-95-113-4-157 89 43 70 116 4 157Z" fill="#EEDCC3"/>
+    <path d="M579 494c-50-35-56-83-4-118 55 35 49 84 4 118Z" fill="#F6EAD6"/>
+    <path d="M579 492c-14-26-18-57-4-87 14 29 10 59 4 87Z" fill="#A66D46"/>
+    <path d="M579 437c-17-20-38-30-62-29 17 20 38 29 62 29Zm0 17c-18-16-40-21-63-14 18 16 39 21 63 14Zm0-17c17-20 38-30 62-29-17 20-38 29-62 29Zm0 17c18-16 40-21 63-14-18 16-39 21-63 14Z" fill="#F6EAD6"/>
+    <circle cx="581" cy="417" r="146" stroke="#E8C8A3" stroke-opacity=".38" stroke-width="2"/>
+  </g>
+  <g fill="#241713">
+    <ellipse cx="176" cy="569" rx="28" ry="15" transform="rotate(-32 176 569)"/>
+    <path d="M169 581c15-12 25-20 39-26" stroke="#A27652" stroke-width="3"/>
+    <ellipse cx="1016" cy="242" rx="27" ry="14" transform="rotate(24 1016 242)"/>
+    <path d="M994 232c15 7 28 14 43 25" stroke="#A27652" stroke-width="3"/>
+    <ellipse cx="933" cy="640" rx="25" ry="13" transform="rotate(-23 933 640)"/>
+    <path d="M915 651c13-9 26-15 40-19" stroke="#A27652" stroke-width="3"/>
+  </g>
+  <g fill="#D1B08C" opacity=".8">
+    <circle cx="246" cy="409" r="3"/>
+    <circle cx="879" cy="475" r="3"/>
+    <circle cx="312" cy="682" r="2"/>
+    <circle cx="882" cy="165" r="2"/>
+  </g>
+  <path d="M0 0h1200v800H0z" filter="url(#grain)" opacity=".18"/>
+</svg>

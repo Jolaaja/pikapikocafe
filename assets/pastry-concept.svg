@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 800" fill="none">
+  <defs>
+    <linearGradient id="table" x1="42" y1="13" x2="938" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E7D7C2"/>
+      <stop offset=".55" stop-color="#C6A786"/>
+      <stop offset="1" stop-color="#8D6C53"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0" cy="0" r="1" gradientTransform="matrix(596 417 -483 690 292 147)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8E8" stop-opacity=".82"/>
+      <stop offset="1" stop-color="#FFF8E8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="plate" x1="204" y1="230" x2="780" y2="688" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFCF5"/>
+      <stop offset=".62" stop-color="#E8DCCB"/>
+      <stop offset="1" stop-color="#BDA58C"/>
+    </linearGradient>
+    <linearGradient id="crust" x1="271" y1="315" x2="733" y2="565" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5D58B"/>
+      <stop offset=".28" stop-color="#C8813D"/>
+      <stop offset=".55" stop-color="#F1C16A"/>
+      <stop offset=".82" stop-color="#A65E2E"/>
+      <stop offset="1" stop-color="#E5AD5D"/>
+    </linearGradient>
+    <linearGradient id="ridge" x1="329" y1="344" x2="655" y2="544" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE7A6"/>
+      <stop offset=".54" stop-color="#D89146"/>
+      <stop offset="1" stop-color="#8E4D2B"/>
+    </linearGradient>
+    <filter id="shadow" x="130" y="200" width="745" height="578" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset dy="25"/>
+      <feGaussianBlur stdDeviation="27"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix values="0 0 0 0 0.18 0 0 0 0 0.1 0 0 0 0 0.04 0 0 0 0.36 0"/>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <filter id="grain">
+      <feTurbulence baseFrequency=".66" numOctaves="2" seed="8" type="fractalNoise"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA slope=".1" type="linear"/></feComponentTransfer>
+    </filter>
+  </defs>
+  <path fill="url(#table)" d="M0 0h1000v800H0z"/>
+  <path fill="url(#sun)" d="M0 0h1000v800H0z"/>
+  <g opacity=".18" stroke="#75553B" stroke-width="2">
+    <path d="M0 114c185 38 309-18 511 10 174 24 318 17 489-13"/>
+    <path d="M0 710c194-32 331 21 535-6 164-22 311-14 465 9"/>
+  </g>
+  <g filter="url(#shadow)">
+    <ellipse cx="502" cy="468" rx="340" ry="228" fill="url(#plate)"/>
+    <ellipse cx="502" cy="461" rx="307" ry="196" stroke="#FFFDF8" stroke-opacity=".78" stroke-width="5"/>
+    <ellipse cx="502" cy="457" rx="254" ry="151" fill="#D8C5AD" fill-opacity=".42"/>
+    <path d="M276 472c11-92 87-153 181-143 47-76 169-79 229-22 93 1 152 77 131 166-17 72-76 107-161 94-62 51-154 31-195-14-87 17-179 2-185-81Z" fill="url(#crust)"/>
+    <path d="M285 462c4-70 57-116 117-120-35 42-48 103-38 170-46-1-76-17-79-50Z" fill="#F7D990"/>
+    <path d="M341 365c43 18 67 72 65 144" stroke="url(#ridge)" stroke-width="17" stroke-linecap="round"/>
+    <path d="M411 338c48 34 71 97 64 174" stroke="url(#ridge)" stroke-width="18" stroke-linecap="round"/>
+    <path d="M496 324c47 39 66 103 57 177" stroke="url(#ridge)" stroke-width="18" stroke-linecap="round"/>
+    <path d="M582 329c42 38 58 99 46 165" stroke="url(#ridge)" stroke-width="17" stroke-linecap="round"/>
+    <path d="M669 361c33 31 43 80 28 127" stroke="url(#ridge)" stroke-width="16" stroke-linecap="round"/>
+    <path d="M295 477c36 34 69 44 118 36m-65 44c45 27 80 28 125 6m-20 39c46 17 79 9 111-15m41 24c44 2 72-16 92-46m27-17c33-14 50-41 54-75" stroke="#8E4E2C" stroke-opacity=".52" stroke-width="7" stroke-linecap="round"/>
+    <path d="M304 432c8-28 25-48 47-61m325 21c21 20 31 44 29 69" stroke="#FFF0BE" stroke-opacity=".9" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <g fill="#765137" opacity=".8">
+    <circle cx="193" cy="334" r="5"/>
+    <circle cx="807" cy="319" r="4"/>
+    <circle cx="794" cy="586" r="5"/>
+    <circle cx="235" cy="601" r="3"/>
+    <circle cx="737" cy="642" r="3"/>
+  </g>
+  <path d="M0 0h1000v800H0z" filter="url(#grain)" opacity=".16"/>
+</svg>

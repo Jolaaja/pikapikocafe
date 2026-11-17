@@ -1,0 +1,158 @@
+{
+  "categories": [
+    {
+      "id": "coffee",
+      "title": {
+        "id": "Kopi",
+        "en": "Coffee"
+      },
+      "description": {
+        "id": "Pilihan kopi, tersedia sesuai keterangan panas atau dingin.",
+        "en": "Coffee favorites, served hot or cold as noted."
+      },
+      "items": [
+        { "name": "Cappuccino Kako", "price": 23000, "temperatures": ["cold", "hot"] },
+        { "name": "Cafe Latte", "price": 25000, "temperatures": ["cold", "hot"] },
+        { "name": "Espresso", "price": 23000, "temperatures": ["hot"] },
+        { "name": "Americano", "price": 23000, "temperatures": ["cold", "hot"] },
+        { "name": "Kopi Gula Aren", "price": 25000, "temperatures": ["cold"] },
+        { "name": "Kopi Rempah Latte", "price": 25000, "temperatures": ["cold", "hot"] },
+        { "name": "Hot Macchiato", "price": 23000, "temperatures": ["hot"] },
+        { "name": "Mochaccino", "price": 25000, "temperatures": ["cold", "hot"] },
+        { "name": "Mont Blanc Pikako", "price": 27000, "temperatures": ["cold"] },
+        { "name": "Coffee Flute", "price": 27000, "temperatures": ["cold"] },
+        { "name": "Butterscotch Pikako", "price": 29000, "temperatures": ["cold"] },
+        { "name": "Mango Cafe Latte", "price": 27000, "temperatures": ["cold"] },
+        { "name": "Kyo Cha Latte", "price": 27000, "temperatures": ["cold"] }
+      ]
+    },
+    {
+      "id": "food",
+      "title": {
+        "id": "Makanan",
+        "en": "Food"
+      },
+      "description": {
+        "id": "Pilihan makanan dan sajian spesial yang berganti setiap hari.",
+        "en": "Cafe favorites and daily-changing specials."
+      },
+      "notes": [
+        {
+          "id": "Noodles Bowl tersedia dengan pilihan topping Beef Teriyaki, Chicken Katsu, atau Salted Egg.",
+          "en": "Noodles Bowl comes with a choice of Beef Teriyaki, Chicken Katsu, or Salted Egg topping."
+        },
+        {
+          "id": "Menu spesial main course dan snack berbeda setiap hari. Tanyakan pilihan hari ini.",
+          "en": "Main-course and snack specials change daily. Please ask what's available today."
+        }
+      ],
+      "items": [
+        { "name": "Steak Burger", "price": 35000 },
+        { "name": "Nasi Campur Bali", "price": 30000 },
+        { "name": "Rice Bowl Beef Teriyaki", "price": 25000 },
+        { "name": "Rice Bowl Chicken Katsu", "price": 25000 },
+        { "name": "Rice Bowl Salted Egg", "price": 25000 },
+        { "name": "Noodles Bowl", "price": 25000 },
+        { "name": "Nasi Goreng Pikako", "price": 28000 },
+        { "name": "Indomie Rebus Komplit", "price": 22000 },
+        { "name": "Indomie Goreng Komplit", "price": 22000 },
+        { "name": "Indomie Nyemek", "price": 22000 },
+        { "name": "Mix Risoles", "price": 18000 },
+        { "name": "Mix Dimsum", "price": 18000 },
+        { "name": "Cireng Rujak Kako", "price": 18000 },
+        { "name": "Empek-empek Kako", "price": 25000 },
+        { "name": "Baso Tahu Kako", "price": 20000 },
+        { "name": "Cuanki Kako", "price": 20000 }
+      ]
+    },
+    {
+      "id": "mocktail",
+      "title": {
+        "id": "Mocktail",
+        "en": "Mocktails"
+      },
+      "description": {
+        "id": "Racikan minuman dingin tanpa alkohol.",
+        "en": "Refreshing alcohol-free mixed drinks."
+      },
+      "items": [
+        { "name": "Love Triangle", "price": 23000, "temperatures": ["cold"] },
+        { "name": "Strawberry Smoothies", "price": 23000, "temperatures": ["cold"] },
+        { "name": "Caipiroska Coco", "price": 23000, "temperatures": ["cold"] },
+        { "name": "Pink Blush", "price": 23000, "temperatures": ["cold"] },
+        { "name": "Belly Jellygrass", "price": 23000, "temperatures": ["cold"] },
+        { "name": "Pikako Sunrise", "price": 23000, "temperatures": ["cold"] },
+        { "name": "Bulla Coco", "price": 23000, "temperatures": ["cold"] },
+        { "name": "Honey Morri", "price": 23000, "temperatures": ["cold"] }
+      ]
+    },
+    {
+      "id": "milky",
+      "title": {
+        "id": "Minuman Susu Dingin",
+        "en": "Milky Cold Drinks"
+      },
+      "description": {
+        "id": "Pilihan minuman dingin yang creamy.",
+        "en": "A creamy selection of cold drinks."
+      },
+      "items": [
+        { "name": "Ice Matcha Latte", "price": 23000, "temperatures": ["cold"] },
+        { "name": "Es Teh Tarik Latte", "price": 23000, "temperatures": ["cold"] },
+        { "name": "Ice Taro Latte", "price": 23000, "temperatures": ["cold"] },
+        { "name": "Blueberry Creamy Latte", "price": 25000, "temperatures": ["cold"] },
+        { "name": "Strawberry Creamy Latte", "price": 25000, "temperatures": ["cold"] },
+        { "name": "Yakult Orange", "price": 23000, "temperatures": ["cold"] },
+        { "name": "Yakult Strawberry", "price": 23000, "temperatures": ["cold"] },
+        { "name": "Yakult Mango", "price": 23000, "temperatures": ["cold"] }
+      ]
+    },
+    {
+      "id": "tea",
+      "title": {
+        "id": "Teh Panas & Dingin",
+        "en": "Hot & Cold Tea"
+      },
+      "description": {
+        "id": "Teh pilihan, tersedia panas atau dingin.",
+        "en": "Tea favorites, available hot or cold."
+      },
+      "items": [
+        { "name": "Teh Tawar", "price": 6000, "temperatures": ["cold", "hot"] },
+        { "name": "Teh Manis", "price": 7000, "temperatures": ["cold", "hot"] },
+        { "name": "Jasmine Tea", "price": 10000, "temperatures": ["cold", "hot"] },
+        { "name": "Green Tea", "price": 10000, "temperatures": ["cold", "hot"] },
+        { "name": "Mint Tea", "price": 12000, "temperatures": ["cold", "hot"] },
+        { "name": "Lemon Tea", "price": 12000, "temperatures": ["cold", "hot"] }
+      ]
+    },
+    {
+      "id": "herbal",
+      "title": {
+        "id": "Teh Artisan & Minuman Herbal",
+        "en": "Artisan Tea & Herbal Drinks"
+      },
+      "description": {
+        "id": "Pilihan artisan tea dan minuman herbal.",
+        "en": "A selection of artisan teas and herbal drinks."
+      },
+      "notes": [
+        {
+          "id": "Semua varian Rp25.000.",
+          "en": "All varieties are Rp25,000."
+        }
+      ],
+      "items": [
+        { "name": "Relaksasi Art Tea", "price": 25000, "temperatures": ["hot"] },
+        { "name": "Woman Healthy Herbal", "price": 25000, "temperatures": ["hot"] },
+        { "name": "Beauty Glow Skin Herbal Tea", "price": 25000, "temperatures": ["hot"] },
+        { "name": "Intimate Woman Herbal", "price": 25000, "temperatures": ["hot"] },
+        { "name": "Man Healthy Herbal", "price": 25000, "temperatures": ["hot"] },
+        { "name": "Vigor Man Herbal", "price": 25000, "temperatures": ["hot"] },
+        { "name": "Kunir Asam", "price": 25000, "temperatures": ["cold", "hot"] },
+        { "name": "Beras Kencur", "price": 25000, "temperatures": ["cold", "hot"] },
+        { "name": "Anti Angin Herbal", "price": 25000, "temperatures": ["hot"] }
+      ]
+    }
+  ]
+}
