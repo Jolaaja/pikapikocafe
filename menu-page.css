@@ -86,16 +86,9 @@ button:focus-visible {
 .digital-menu-mark {
   width: 42px;
   height: 42px;
-  display: grid;
-  place-items: center;
   border: 1px solid var(--menu-caramel);
   border-radius: 50%;
-  background: var(--menu-ink);
-  color: var(--menu-cream);
-  font-family: var(--menu-serif);
-  font-size: 30px;
-  font-weight: 600;
-  line-height: 1;
+  object-fit: cover;
 }
 
 .digital-menu-wordmark {
@@ -193,6 +186,50 @@ button:focus-visible {
   align-items: center;
   flex-wrap: wrap;
   gap: 12px 18px;
+}
+
+.digital-menu-search {
+  max-width: 560px;
+  margin: 0 0 26px;
+  display: grid;
+  gap: 8px;
+}
+
+.digital-menu-search label {
+  color: var(--menu-ink);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.digital-menu-search input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 15px;
+  border: 1px solid #d5c6b5;
+  border-radius: 2px;
+  background: rgba(255, 250, 243, 0.88);
+  color: var(--menu-ink);
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.digital-menu-search input::placeholder {
+  color: #968675;
+}
+
+.digital-menu-search input:focus {
+  border-color: var(--menu-caramel);
+  outline: none;
+  background: var(--menu-paper);
+  box-shadow: 0 0 0 3px rgba(178, 120, 79, 0.12);
+}
+
+.digital-menu-search-results {
+  min-height: 16px;
+  margin: 0;
+  color: var(--menu-muted);
+  font-size: 10px;
 }
 
 .poster-download {

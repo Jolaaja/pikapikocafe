@@ -1,4 +1,7 @@
-const copy = {
+export type Language = "id" | "en";
+export type HomeCopy = Record<Language, Record<string, string>>;
+
+export const copy: HomeCopy = {
   id: {
     "page.title": "Pika Piko Cafe — Ruang untuk menikmati jeda",
     "page.description": "Kopi yang diracik dengan saksama, sajian lezat, dan ruang hangat untuk menikmati jeda di Pika Piko Cafe.",
@@ -7,6 +10,7 @@ const copy = {
     "og.imageAlt": "Suasana hangat Pika Piko Cafe",
     "skip": "Langsung ke konten",
     "announcement": "KOPI NIKMAT, JEDA YANG HANGAT",
+    "intro.tagline": "KOPI NIKMAT · JEDA YANG HANGAT",
     "brand.home": "Beranda Pika Piko Cafe",
     "brand.top": "Pika Piko Cafe — kembali ke atas",
     "nav.label": "Navigasi utama",
@@ -21,6 +25,7 @@ const copy = {
     "hero.intro": "Kopi yang diracik dengan saksama, sajian lezat, dan suasana hangat untuk menikmati hari dengan lebih pelan.",
     "hero.menu": "Lihat menu",
     "hero.space": "Jelajahi suasananya",
+    "hero.directions": "Petunjuk arah",
     "hero.caption": "Tempat yang nyaman untuk singgah",
     "hero.scrollLabel": "Gulir untuk melihat lebih lanjut",
     "hero.scroll": "GULIR PERLAHAN",
@@ -44,15 +49,18 @@ const copy = {
     "menu.coffeeLabel": "DIRACIK DENGAN SAKSAMA",
     "menu.coffeeTitle": "Kopi, sesuai seleramu.",
     "menu.coffeeList": "Pilihan kopi populer",
+    "menu.coffeeLink": "Lihat semua kopi",
     "menu.drinkLabel": "SEGAR DARI BAR",
     "menu.drinkTitle": "Mocktail favorit.",
     "menu.drinkList": "Pilihan minuman dingin",
+    "menu.drinkLink": "Lihat semua mocktail",
     "menu.moreLabel": "JEDA YANG MENENANGKAN",
     "menu.moreTitle": "Teh & lainnya.",
     "menu.moreList": "Contoh menu minuman lainnya",
     "menu.foodLabel": "TEMAN MINUM KOPI",
     "menu.foodTitle": "Sajian yang menggugah.",
     "menu.foodList": "Pilihan makanan populer",
+    "menu.foodLink": "Lihat semua makanan",
     "menu.fullMenu": "Lihat seluruh menu dan pilihan sajian",
     "items.cappuccinoKako": "Cappuccino Kako",
     "items.cafeLatte": "Cafe Latte",
@@ -119,6 +127,7 @@ const copy = {
     "og.imageAlt": "A warm glimpse inside Pika Piko Cafe",
     "skip": "Skip to content",
     "announcement": "GOOD COFFEE, SLOW MOMENTS",
+    "intro.tagline": "GOOD COFFEE · A WARM PLACE TO PAUSE",
     "brand.home": "Pika Piko Cafe home",
     "brand.top": "Pika Piko Cafe — back to top",
     "nav.label": "Main navigation",
@@ -133,6 +142,7 @@ const copy = {
     "hero.intro": "Thoughtfully made coffee, something good to eat, and a warm place to let the day unfold.",
     "hero.menu": "Explore the menu",
     "hero.space": "Find your place",
+    "hero.directions": "Get directions",
     "hero.caption": "An easy place to settle in",
     "hero.scrollLabel": "Scroll to discover more",
     "hero.scroll": "SCROLL TO SLOW DOWN",
@@ -156,15 +166,18 @@ const copy = {
     "menu.coffeeLabel": "MADE WITH CARE",
     "menu.coffeeTitle": "Coffee, your way.",
     "menu.coffeeList": "Popular coffee choices",
+    "menu.coffeeLink": "Explore all coffee",
     "menu.drinkLabel": "FRESH FROM THE BAR",
     "menu.drinkTitle": "Favorite mocktails.",
     "menu.drinkList": "Cold drink choices",
+    "menu.drinkLink": "Explore all mocktails",
     "menu.moreLabel": "A GENTLER PAUSE",
     "menu.moreTitle": "Tea & more.",
     "menu.moreList": "Sample menu of other drinks",
     "menu.foodLabel": "A LITTLE SOMETHING",
     "menu.foodTitle": "Good things to eat.",
     "menu.foodList": "Popular food choices",
+    "menu.foodLink": "Explore all food",
     "menu.fullMenu": "Explore the full menu and all options",
     "items.cappuccinoKako": "Cappuccino Kako",
     "items.cafeLatte": "Cafe Latte",
@@ -224,104 +237,3 @@ const copy = {
     "footer.top": "Back to the top ↑"
   }
 };
-
-const year = document.querySelector("#current-year");
-const languageButtons = document.querySelectorAll("[data-language]");
-const language = document.documentElement.lang;
-
-function setLanguage(nextLanguage) {
-  const selectedCopy = copy[nextLanguage];
-
-  if (!selectedCopy) {
-    throw new Error(`Unsupported language: ${nextLanguage}`);
-  }
-
-  document.documentElement.lang = nextLanguage;
-  document.title = selectedCopy["page.title"];
-
-  for (const [selector, key] of [
-    ['meta[name="description"]', "page.description"],
-    ['meta[property="og:title"]', "og.title"],
-    ['meta[property="og:description"]', "og.description"],
-    ['meta[property="og:image:alt"]', "og.imageAlt"],
-    ['meta[name="twitter:title"]', "og.title"],
-    ['meta[name="twitter:description"]', "og.description"]
-  ]) {
-    const meta = document.querySelector(selector);
-    if (meta) {
-      meta.content = selectedCopy[key];
-    }
-  }
-
-  document.querySelectorAll("[data-i18n]").forEach((element) => {
-    const key = element.dataset.i18n;
-    if (!(key in selectedCopy)) {
-      throw new Error(`Missing ${nextLanguage} translation: ${key}`);
-    }
-    element.textContent = selectedCopy[key];
-  });
-
-  for (const [attribute, selector] of [
-    ["aria", "[data-i18n-aria]"],
-    ["alt", "[data-i18n-alt]"]
-  ]) {
-    document.querySelectorAll(selector).forEach((element) => {
-      const key = element.dataset[`i18n${attribute === "aria" ? "Aria" : "Alt"}`];
-      if (!(key in selectedCopy)) {
-        throw new Error(`Missing ${nextLanguage} translation: ${key}`);
-      }
-      element.setAttribute(attribute === "aria" ? "aria-label" : attribute, selectedCopy[key]);
-    });
-  }
-
-  document.querySelectorAll("[data-price]").forEach((element) => {
-    const amount = Number(element.dataset.price);
-    if (!Number.isSafeInteger(amount) || amount < 0) {
-      throw new RangeError(`Invalid sample menu price: ${element.dataset.price}`);
-    }
-    element.textContent = new Intl.NumberFormat(nextLanguage === "id" ? "id-ID" : "en-ID", {
-      style: "currency",
-      currency: "IDR",
-      maximumFractionDigits: 0
-    }).format(amount);
-  });
-
-  languageButtons.forEach((button) => {
-    button.setAttribute("aria-pressed", String(button.dataset.language === nextLanguage));
-  });
-}
-
-languageButtons.forEach((button) => {
-  button.addEventListener("click", () => setLanguage(button.dataset.language));
-});
-
-setLanguage(language);
-
-if (year) {
-  year.textContent = String(new Date().getFullYear());
-}
-
-const revealItems = document.querySelectorAll("[data-reveal]");
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-if (revealItems.length && !prefersReducedMotion && "IntersectionObserver" in window) {
-  document.documentElement.classList.add("motion-ready");
-
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) {
-        continue;
-      }
-
-      const delay = Number(entry.target.dataset.revealDelay || 0);
-      entry.target.style.transitionDelay = `${delay}ms`;
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    }
-  }, {
-    rootMargin: "0px 0px -48px 0px",
-    threshold: 0.12
-  });
-
-  revealItems.forEach((item) => revealObserver.observe(item));
-}

@@ -6,6 +6,8 @@ import QRCode from "qrcode";
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const publicDirectory = resolve(projectRoot, "public");
 const menuData = JSON.parse(await readFile(resolve(projectRoot, "menu-data.json"), "utf8"));
+const logoData = await readFile(resolve(projectRoot, "assets", "pika-piko-logo.webp"));
+const logoHref = `data:image/webp;base64,${logoData.toString("base64")}`;
 const menuUrl = new URL(
   process.env.MENU_URL || "https://pikapiko-cafe.my.id/menu.html"
 );
@@ -154,9 +156,7 @@ const posterSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://w
   <title id="poster-title">Menu Pika Piko Cafe · A4 landscape</title>
   <desc id="poster-description">Menu bilingual dengan QR code menuju ${escapeXml(menuUrl.href)}.</desc>
   <rect width="1123" height="794" fill="#f5f0e7"/>
-  <circle cx="60" cy="50" r="22" fill="#30221d"/>
-  <circle cx="60" cy="50" r="19" fill="none" stroke="#d7ad88" stroke-opacity=".72"/>
-  <text x="60" y="58" fill="#f5f0e7" font-family="Georgia, serif" font-size="29" font-style="italic" text-anchor="middle">P</text>
+  <image x="36" y="25" width="48" height="48" href="${logoHref}" preserveAspectRatio="xMidYMid meet"/>
   <text x="96" y="48" fill="#30221d" font-family="Georgia, serif" font-size="26" font-weight="600">pika piko</text>
   <text x="98" y="64" fill="#765e4c" font-family="Arial, Helvetica, sans-serif" font-size="7" letter-spacing="3.1">CAFE</text>
   <text x="38" y="108" fill="#30221d" font-family="Georgia, serif" font-size="30">Menu · Menu</text>

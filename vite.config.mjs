@@ -1,13 +1,12 @@
 import { resolve } from "node:path";
 import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      input: {
-        main: resolve(process.cwd(), "index.html"),
-        menu: resolve(process.cwd(), "menu.html")
-      }
+  plugins: [react()],
+  resolve: {
+    alias: {
+      "@": resolve(process.cwd(), "src")
     }
   }
 });

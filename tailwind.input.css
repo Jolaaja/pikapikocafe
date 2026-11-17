@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @source "./index.html";
-@source "./menu.html";
+@source "./src";
 
 @layer base {
   :focus-visible {
