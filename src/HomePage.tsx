@@ -1,34 +1,58 @@
 import { useEffect, useState } from "react";
-import { copy, type Language } from "./home-copy";
+import { copy } from "./home-copy";
 import cafeInterior from "../assets/cafe-interior.webp";
 import coffeeConcept from "../assets/coffee-concept.svg";
 import nightTerrace from "../assets/night-terrace.webp";
 import pastryConcept from "../assets/pastry-concept.svg";
-import pikaPikoLogo from "../assets/pika-piko-logo.webp";
+import pikaPikoMark from "../assets/pika-piko-mark.svg";
 import sunlitInterior from "../assets/sunlit-interior.webp";
 import terraceSeating from "../assets/terrace-seating.webp";
 import terraceSunset from "../assets/terrace-sunset.webp";
+import menuData from "../menu-data.json";
 
-const menuItems = [
-  [
-    ["items.cappuccinoKako", 23000],
-    ["items.cafeLatte", 25000],
-    ["items.kopiGulaAren", 25000]
-  ],
-  [
-    ["items.loveTriangle", 23000],
-    ["items.strawberrySmoothies", 23000],
-    ["items.pikakoSunrise", 23000]
-  ],
-  [
-    ["items.steakBurger", 35000],
-    ["items.nasiCampurBali", 30000],
-    ["items.nasiGorengPikako", 28000]
-  ]
+const menuCardDefinitions = [
+  {
+    categoryId: "coffee",
+    itemNames: ["Cappuccino Kako", "Cafe Latte", "Kopi Gula Aren"],
+    labelKey: "menu.coffeeLabel",
+    titleKey: "menu.coffeeTitle",
+    listKey: "menu.coffeeList",
+    linkKey: "menu.coffeeLink"
+  },
+  {
+    categoryId: "mocktail",
+    itemNames: ["Love Triangle", "Strawberry Smoothies", "Pikako Sunrise"],
+    labelKey: "menu.drinkLabel",
+    titleKey: "menu.drinkTitle",
+    listKey: "menu.drinkList",
+    linkKey: "menu.drinkLink"
+  },
+  {
+    categoryId: "food",
+    itemNames: ["Steak Burger", "Nasi Campur Bali", "Nasi Goreng Pikako"],
+    labelKey: "menu.foodLabel",
+    titleKey: "menu.foodTitle",
+    listKey: "menu.foodList",
+    linkKey: "menu.foodLink"
+  }
 ] as const;
 
-const menuCategories = ["coffee", "mocktail", "food"] as const;
-const menuCardLinks = ["menu.coffeeLink", "menu.drinkLink", "menu.foodLink"] as const;
+const menuCards = menuCardDefinitions.map((definition) => {
+  const category = menuData.categories.find((entry) => entry.id === definition.categoryId);
+  if (!category) {
+    throw new Error(`Missing homepage menu category: ${definition.categoryId}`);
+  }
+
+  const items = definition.itemNames.map((name) => {
+    const item = category.items.find((entry) => entry.name === name);
+    if (!item) {
+      throw new Error(`Missing homepage menu item "${name}" in ${definition.categoryId}`);
+    }
+    return item;
+  });
+
+  return { ...definition, items };
+});
 
 const menuIcons = [
   <svg key="coffee" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M10 19h23v10a9 9 0 0 1-9 9h-5a9 9 0 0 1-9-9V19Z" stroke="currentColor" strokeWidth="1.5"/><path d="M33 22h3a5 5 0 0 1 0 10h-4M15 13c0-2 2-2 2-5m7 5c0-2 2-2 2-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
@@ -36,12 +60,12 @@ const menuIcons = [
   <svg key="food" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M9 29c4-8 9-12 15-12s11 4 15 12M12 29h24l-3 10H15l-3-10Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><path d="M20 17c0-2 2-3 2-6m6 6c0-2 2-3 2-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>
 ];
 
-function IntroOverlay({ language, onFinish }: { language: Language; onFinish: () => void }) {
+function IntroOverlay({ onFinish }: { onFinish: () => void }) {
   const [visible, setVisible] = useState(!window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
   useEffect(() => {
     if (!visible) return;
-    const timer = window.setTimeout(() => setVisible(false), 2200);
+    const timer = window.setTimeout(() => setVisible(false), 2000);
     return () => window.clearTimeout(timer);
   }, [visible]);
 
@@ -59,40 +83,24 @@ function IntroOverlay({ language, onFinish }: { language: Language; onFinish: ()
         <img src={cafeInterior} alt="" fetchPriority="high" />
       </picture>
       <div className="site-intro-content">
-        <img className="site-intro-logo" src={pikaPikoLogo} alt="" />
+        <img className="site-intro-logo" src={pikaPikoMark} alt="" />
         <span className="site-intro-name">pika piko</span>
         <span className="site-intro-caption">CAFE</span>
         <span className="site-intro-rule" />
-        <span className="site-intro-tagline">{copy[language]["intro.tagline"]}</span>
+        <span className="site-intro-tagline">{copy.id["intro.tagline"]}</span>
       </div>
     </div>
   );
 }
 
-function LanguageSwitch({ language, setLanguage }: { language: Language; setLanguage: (language: Language) => void }) {
-  return (
-    <div className="language-switch" role="group" aria-label={copy[language]["language.label"]}>
-      {(["id", "en"] as const).map((value, index) => (
-        <span className="contents" key={value}>
-          {index > 0 && <span aria-hidden="true">/</span>}
-          <button type="button" aria-pressed={language === value} onClick={() => setLanguage(value)}>
-            {value.toUpperCase()}
-          </button>
-        </span>
-      ))}
-    </div>
-  );
-}
-
 export default function HomePage() {
-  const [language, setLanguage] = useState<Language>("id");
-  const t = (key: string) => copy[language][key] ?? key;
+  const t = (key: string) => copy.id[key] ?? key;
   const [showIntro, setShowIntro] = useState(
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
 
   useEffect(() => {
-    document.documentElement.lang = language;
+    document.documentElement.lang = "id";
     document.title = t("page.title");
     const metaValues: Record<string, string> = {
       'meta[name="description"]': t("page.description"),
@@ -109,28 +117,45 @@ export default function HomePage() {
     });
     const canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (canonical) canonical.href = `${window.location.origin}/`;
-  }, [language]);
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     document.documentElement.classList.add("motion-ready");
+    const revealTargets = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    revealTargets.forEach((target) => {
+      const delay = Math.max(0, Number(target.dataset.revealDelay || 0));
+      target.style.setProperty("--reveal-delay", `${delay}ms`);
+      target.inert = true;
+    });
+    if (!("IntersectionObserver" in window)) {
+      revealTargets.forEach((target) => {
+        target.inert = false;
+        target.classList.add("is-visible");
+      });
+      return () => document.documentElement.classList.remove("motion-ready");
+    }
     const observer = new IntersectionObserver((entries, currentObserver) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        const delay = Number((entry.target as HTMLElement).dataset.revealDelay || 0);
-        (entry.target as HTMLElement).style.transitionDelay = `${delay}ms`;
-        entry.target.classList.add("is-visible");
+        const target = entry.target as HTMLElement;
+        target.inert = false;
+        target.classList.add("is-visible");
         currentObserver.unobserve(entry.target);
       });
     }, { rootMargin: "0px 0px -48px 0px", threshold: 0.12 });
-    document.querySelectorAll("[data-reveal]").forEach((item) => observer.observe(item));
+    revealTargets.forEach((target) => observer.observe(target));
     return () => {
       observer.disconnect();
+      revealTargets.forEach((target) => {
+        target.inert = false;
+        target.style.removeProperty("--reveal-delay");
+      });
       document.documentElement.classList.remove("motion-ready");
     };
   }, []);
 
-  const money = (amount: number) => new Intl.NumberFormat(language === "id" ? "id-ID" : "en-ID", {
+  const money = (amount: number) => new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0
@@ -138,14 +163,14 @@ export default function HomePage() {
 
   return (
     <div className="antialiased min-h-screen">
-      {showIntro && <IntroOverlay language={language} onFinish={() => setShowIntro(false)} />}
+      {showIntro && <IntroOverlay onFinish={() => setShowIntro(false)} />}
       <a className="skip-link" href="#main-content">{t("skip")}</a>
       <div className="announcement-bar">
         <p><span>PIKA PIKO CAFE</span><i aria-hidden="true">·</i><span>{t("announcement")}</span></p>
       </div>
       <header className="site-header flex items-center justify-between">
         <a className="brand-lockup" href="#home" aria-label={t("brand.home")}>
-          <img className="brand-mark" src={pikaPikoLogo} alt="" />
+          <img className="brand-mark" src={pikaPikoMark} alt="" />
           <span className="wordmark"><span className="wordmark-name">pika piko</span><span className="wordmark-caption">CAFE</span></span>
         </a>
         <nav className="site-nav flex items-center" aria-label={t("nav.label")}>
@@ -154,7 +179,6 @@ export default function HomePage() {
           <a href="#story"><span>{t("nav.story")}</span></a>
         </nav>
         <div className="header-actions">
-          <LanguageSwitch language={language} setLanguage={setLanguage} />
           <a className="header-link" href="#visit"><span>{t("nav.visit")}</span> <span aria-hidden="true">↗</span></a>
         </div>
       </header>
@@ -200,16 +224,16 @@ export default function HomePage() {
           </div>
           <p className="menu-demo-note" role="note"><span className="demo-dot" aria-hidden="true" /><span>{t("menu.demo")}</span></p>
           <div className="menu-grid grid grid-cols-3">
-            {menuItems.map((items, index) => (
+            {menuCards.map((card, index) => (
               <article className={`menu-card${index === 1 ? " menu-card-featured" : ""}`} data-reveal data-reveal-delay={index * 120} key={index}>
                 <div className="menu-card-top"><span className="menu-number">0{index + 1}</span><span className="menu-icon">{menuIcons[index]}</span></div>
-                <p className="menu-overline">{t(["menu.coffeeLabel", "menu.drinkLabel", "menu.foodLabel"][index])}</p>
-                <h3>{t(["menu.coffeeTitle", "menu.drinkTitle", "menu.foodTitle"][index])}</h3>
-                <ul className="menu-items" aria-label={t(["menu.coffeeList", "menu.drinkList", "menu.foodList"][index])}>
-                  {items.map(([name, price]) => <li key={name}><span>{t(name)}</span><strong>{money(price)}</strong></li>)}
+                <p className="menu-overline">{t(card.labelKey)}</p>
+                <h3>{t(card.titleKey)}</h3>
+                <ul className="menu-items" aria-label={t(card.listKey)}>
+                  {card.items.map((item) => <li key={item.name}><span>{item.name}</span><strong>{money(item.price)}</strong></li>)}
                 </ul>
-                <a className="menu-card-link" href={`/menu.html#menu-${menuCategories[index]}`}>
-                  <span>{t(menuCardLinks[index])}</span><span aria-hidden="true">↗</span>
+                <a className="menu-card-link" href={`/menu.html#menu-${card.categoryId}`}>
+                  <span>{t(card.linkKey)}</span><span aria-hidden="true">↗</span>
                 </a>
               </article>
             ))}
@@ -246,9 +270,22 @@ export default function HomePage() {
         <section className="visit-section section-wrap" id="visit" aria-labelledby="visit-title">
           <div className="visit-heading" data-reveal><p className="eyebrow">{t("visit.eyebrow")}</p><h2 id="visit-title"><span>{t("visit.titleA")}</span><br /><em>{t("visit.titleB")}</em></h2></div>
           <div className="visit-details">
-            <article className="visit-card" data-reveal><span className="visit-label">{t("visit.location")}</span><h3>Pika Piko Cafe</h3><a href="https://maps.app.goo.gl/jBRzdxzhi6D8ZhKP6" target="_blank" rel="noopener noreferrer"><span>{t("visit.map")}</span><span aria-hidden="true">↗</span></a></article>
-            <article className="visit-card" data-reveal data-reveal-delay="100"><span className="visit-label">{t("visit.hours")}</span><h3>{t("visit.daily")}</h3><p>{t("visit.hoursNote")}</p></article>
-            <article className="visit-card" data-reveal data-reveal-delay="200"><span className="visit-label">{t("visit.contact")}</span><h3>{t("visit.contactTitle")}</h3><p>{t("visit.contactNote")}</p></article>
+            <article className="visit-card" data-reveal>
+              <div>
+                <span className="visit-label">{t("visit.location")}</span>
+                <h3>Pika Piko Cafe</h3>
+              </div>
+              <a href="https://maps.app.goo.gl/jBRzdxzhi6D8ZhKP6" target="_blank" rel="noopener noreferrer">
+                <span>{t("visit.map")}</span><span aria-hidden="true">↗</span>
+              </a>
+            </article>
+            <article className="visit-card" data-reveal>
+              <div>
+                <span className="visit-label">{t("visit.hours")}</span>
+                <h3>{t("visit.daily")}</h3>
+              </div>
+              <p>{t("visit.hoursValue")}</p>
+            </article>
           </div>
         </section>
 
@@ -259,7 +296,7 @@ export default function HomePage() {
       </main>
 
       <footer className="site-footer">
-        <a className="brand-lockup" href="#home" aria-label={t("brand.top")}><img className="brand-mark brand-mark-footer" src={pikaPikoLogo} alt="" /><span className="wordmark wordmark-footer"><span className="wordmark-name">pika piko</span><span className="wordmark-caption">CAFE</span></span></a>
+        <a className="brand-lockup" href="#home" aria-label={t("brand.top")}><img className="brand-mark brand-mark-footer" src={pikaPikoMark} alt="" /><span className="wordmark wordmark-footer"><span className="wordmark-name">pika piko</span><span className="wordmark-caption">CAFE</span></span></a>
         <p className="footer-note">{t("footer.note")}</p>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Pika Piko Cafe</span><a href="#home">{t("footer.top")}</a></div>
       </footer>
